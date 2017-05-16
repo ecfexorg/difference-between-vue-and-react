@@ -1,0 +1,102 @@
+body {
+  margin: 0;
+  background: #f0f0f0;
+}
+
+img {
+  width: 100%;
+}
+
+pre {
+  padding: 20px;
+  background: #f8f8f2;
+  color: #4d4d4c;
+  overflow-x: auto;
+}
+
+blockquote {
+  color: #999;
+}
+
+.main {
+  margin: 80px auto;
+  padding: 40px 80px;
+  width: 1000px;
+  background: white;
+  box-sizing: border-box;
+  box-shadow: 0 1px 6px #ccc;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+ @media (min-width: 1300px) {
+   .main {
+     width: 1200px;
+   }
+ }
+
+.section > .title {
+  display: inline-block;
+  margin: 20px 0 20px -80px;
+  padding:  10px 10px 10px 80px;
+  background: #4d4d4c;
+  color: white;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.section > .content {
+  margin: 0 -80px;
+  padding: 20px 80px;
+  overflow: hidden;
+}
+
+.left, .right {
+  float: left;
+  width: 49%;
+}
+
+.left .title, .right .title {
+  display: inline-block;
+  padding: 2px 10px;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  background: #eee;
+  color: #666;
+  font-weight: normal;
+}
+
+.right {
+  margin-left: 2%;
+}
+
+.left pre {
+  margin-left: -80px;
+  padding-left: 80px;
+}
+
+.right pre {
+  margin-right: -80px;
+  padding-right: 80px;  
+}
+
+.left .title {
+  float: left;
+}
+
+.left .content {
+  clear: both;
+}
+
+.right .title {
+  float: right;
+}
+
+.right .content {
+  clear: both;
+}
+
+.footer {
+  color: #aaa !important;
+  text-align: center;
+  margin-bottom: 10px;
+}

@@ -1,0 +1,625 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>React和Vue特性和书写差异</title>
+  <link rel="stylesheet" href="./theme.css"/>
+  <link rel="stylesheet" href="./style.css"/>
+</head>
+<body>
+  <div class="main">
+    <h1 id="react-vue-">React和Vue特性和书写差异</h1>
+<blockquote>
+<p>Vue均使用ES6语法，主要以单文件组件为例，写法上优先使用缩写。</p>
+<p>React使用TS语法。</p>
+</blockquote>
+
+  <div class="section">
+    <h2 class="title">生命周期</h2>
+    <div class="content">
+      <div class="left">
+        <h3 class="title">Vue</h3>
+        <div class="content"><p><img src="./images/vue-lifecycle.png" alt="vue-lifecyle"></p>
+</div>
+      </div>
+      <div class="right">
+        <h3 class="title">React</h3>
+        <div class="content"><p><img src="./images/react-lifecycle.png" alt="react-lifecyle"></p>
+</div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="section">
+    <h2 class="title">入口&根实例</h2>
+    <div class="content">
+      <div class="left">
+        <h3 class="title">Vue</h3>
+        <div class="content"><pre><code class="lang-js"><span class="hljs-keyword">const</span> <span class="hljs-keyword">app</span> = new Vue({
+  <span class="hljs-comment">/* 选项 */</span>
+  render: (<span class="hljs-keyword">h</span>) =&gt; <span class="hljs-built_in">h</span>(<span class="hljs-keyword">App</span>) <span class="hljs-comment">// App为根组件</span>
+}).<span class="hljs-variable">$mount</span>('#<span class="hljs-keyword">app</span>')
+</code></pre>
+</div>
+      </div>
+      <div class="right">
+        <h3 class="title">React</h3>
+        <div class="content"><pre><code class="lang-js">ReactDOM.render(
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">App</span>/&gt;</span></span>, <span class="hljs-comment">// App为根组件</span>
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'app'</span>)
+)
+</code></pre>
+</div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="section">
+    <h2 class="title">组件定义</h2>
+    <div class="content">
+      <div class="left">
+        <h3 class="title">Vue</h3>
+        <div class="content"><pre><code class="lang-js"><span class="hljs-comment">// 定义组件构造器</span>
+<span class="hljs-selector-tag">var</span> MyComponent = Vue.extend({<span class="hljs-comment">/* 选项 */</span>})
+
+<span class="hljs-comment">// 注册全局组件</span>
+Vue.component(<span class="hljs-string">'my-component'</span>, {<span class="hljs-comment">/* 选项 */</span>})
+</code></pre>
+<pre><code class="lang-html"><span class="hljs-comment">&lt;!-- 单文件组件 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"my-component"</span>&gt;</span>hello<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+  <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+    <span class="hljs-comment">/* 选项 */</span>
+  }
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre>
+</div>
+      </div>
+      <div class="right">
+        <h3 class="title">React</h3>
+        <div class="content"><pre><code class="lang-js"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component&lt;</span></span>{}, void&gt; {
+  render () {
+    <span class="hljs-keyword">return</span> &lt;div className=<span class="hljs-symbol">'fo</span>o'&gt;hello&lt;/div&gt;
+  }
+}
+</code></pre>
+</div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="section">
+    <h2 class="title">组件引用</h2>
+    <div class="content">
+      <div class="left">
+        <h3 class="title">Vue</h3>
+        <div class="content"><pre><code class="lang-html"><span class="hljs-comment">&lt;!-- 以单文件组件为例：Foo.js --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"Foo"</span>&gt;</span>
+    <span class="hljs-comment">&lt;!-- 必须小写，不能自闭合 --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">bar</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">bar</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+  <span class="hljs-comment">// 引入组件</span>
+  <span class="hljs-keyword">import</span> Bar <span class="hljs-keyword">from</span> <span class="hljs-string">'./Bar'</span>
+
+  <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+    <span class="hljs-attr">name</span>: <span class="hljs-string">'Foo'</span>,
+    <span class="hljs-attr">components</span>: {Bar}
+  }
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre>
+</div>
+      </div>
+      <div class="right">
+        <h3 class="title">React</h3>
+        <div class="content"><pre><code class="lang-js"><span class="hljs-keyword">import</span> <span class="hljs-type">Bar</span> from './<span class="hljs-type">Bar</span>'
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component&lt;</span></span>{}, void&gt; {
+  render () {
+    <span class="hljs-keyword">return</span> (
+      &lt;div className=<span class="hljs-symbol">'fo</span>o'&gt;
+        {<span class="hljs-comment">/* 组件约定大写开头，可自闭合 */</span>}
+        &lt;<span class="hljs-type">Bar</span>/&gt;
+      &lt;/div&gt;
+    )
+  }
+}
+</code></pre>
+</div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="section">
+    <h2 class="title">组件内部状态</h2>
+    <div class="content">
+      <div class="left">
+        <h3 class="title">Vue</h3>
+        <div class="content"><pre><code class="lang-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"foo"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">'name'</span>&gt;</span></span><span class="hljs-template-variable">{{name}}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">'age'</span>&gt;</span>
+      </span><span class="hljs-template-variable">{{age}}</span><span class="xml">
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">"onAdd"</span>&gt;</span>add<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+  <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+    data () {
+      <span class="hljs-keyword">return</span> {
+        <span class="hljs-attr">name</span>: <span class="hljs-string">'Tom'</span>,
+        <span class="hljs-attr">age</span>: <span class="hljs-number">18</span>
+      }
+    },
+    methods {
+      onAdd () {
+        <span class="hljs-comment">// 直接修改</span>
+        <span class="hljs-keyword">this</span>.age++
+      }
+    }
+  }
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span>
+</code></pre>
+</div>
+      </div>
+      <div class="right">
+        <h3 class="title">React</h3>
+        <div class="content"><pre><code class="lang-js">interface <span class="hljs-type">IFooState</span> {
+  name: string,
+  age: number
+}
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component&lt;</span></span>{}, <span class="hljs-type">IFooState</span>&gt; {
+  state = {
+    name: <span class="hljs-symbol">'to</span>m',
+    age: <span class="hljs-number">18</span>
+  }
+
+  onAdd = () =&gt; {
+    <span class="hljs-comment">// 必须通过setState修改</span>
+    <span class="hljs-keyword">this</span>.setState({
+      age: <span class="hljs-keyword">this</span>.state.age + <span class="hljs-number">1</span>
+    })
+  }
+
+  render () {
+    const {name, age} = <span class="hljs-keyword">this</span>.state
+
+    <span class="hljs-keyword">return</span> (
+      &lt;div className=<span class="hljs-symbol">'fo</span>o'&gt;
+        &lt;p <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-symbol">'nam</span>e'&gt;{name}&lt;/p&gt;
+        &lt;p <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-symbol">'ag</span>e'&gt;
+          {age}
+          &lt;button onClick={<span class="hljs-keyword">this</span>.onAdd}&gt;add&lt;/button&gt;
+        &lt;/p&gt;
+      &lt;/div&gt;
+    )
+  }
+}
+</code></pre>
+</div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="section">
+    <h2 class="title">父子组件通讯</h2>
+    <div class="content">
+      <div class="left">
+        <h3 class="title">Vue</h3>
+        <div class="content"><pre><code class="lang-html"><span class="hljs-comment">&lt;!-- Parent.vue --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"parent"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">child</span> <span class="hljs-attr">name</span>=<span class="hljs-string">'tom'</span> <span class="hljs-attr">:age</span>=<span class="hljs-string">'18'</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">"onAdd"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">child</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+  <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+    data () {
+      <span class="hljs-keyword">return</span> {
+        <span class="hljs-attr">age</span>: <span class="hljs-number">18</span>
+      }
+    },
+    methods {
+      onAdd () {
+        <span class="hljs-keyword">this</span>.age++
+      }
+    }
+  }
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre>
+<pre><code class="lang-html"><span class="xml"><span class="hljs-comment">&lt;!-- Child.vue --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"child"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">'name'</span>&gt;</span></span><span class="hljs-template-variable">{{name}}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">'age'</span>&gt;</span>
+      </span><span class="hljs-template-variable">{{age}}</span><span class="xml">
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">"onAdd"</span>&gt;</span>add<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+  <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+    <span class="hljs-attr">props</span>: {
+      <span class="hljs-attr">name</span>: {<span class="hljs-attr">type</span>: <span class="hljs-built_in">String</span>},
+      <span class="hljs-attr">age</span>: {<span class="hljs-attr">type</span>: <span class="hljs-built_in">Number</span>, <span class="hljs-attr">default</span>: <span class="hljs-number">18</span>}
+    },
+    methods {
+      onAdd () {
+        <span class="hljs-keyword">this</span>.$emit(<span class="hljs-string">'click'</span>)
+      }
+    }
+  }
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span>
+</code></pre>
+</div>
+      </div>
+      <div class="right">
+        <h3 class="title">React</h3>
+        <div class="content"><pre><code class="lang-js">
+interface IChildProps {
+  <span class="hljs-attr">name</span>: string,
+  age?: number,
+  onAdd?: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> <span class="hljs-keyword">void</span>
+}
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Child</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span>&lt;<span class="hljs-title">IChildProps</span>, <span class="hljs-title">void</span>&gt; </span>{
+  <span class="hljs-keyword">static</span> defaultProps = {
+    age = <span class="hljs-number">18</span>,
+    <span class="hljs-attr">onAdd</span>: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {}
+  }
+
+  render () {
+    <span class="hljs-keyword">const</span> {name, age} = <span class="hljs-keyword">this</span>.props
+
+    <span class="hljs-keyword">return</span> (
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'child'</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">'name'</span>&gt;</span>{name}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">'age'</span>&gt;</span>
+          {age}
+          <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{this.onAdd}</span>&gt;</span>add<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+    )
+  }
+}
+
+interface IParentState {
+  <span class="hljs-attr">age</span>: number
+}
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Parent</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span>&lt;</span>{}, IParentState&gt; {
+  state = {
+    <span class="hljs-attr">age</span>: <span class="hljs-number">18</span>
+  }
+
+  onAdd = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    <span class="hljs-keyword">this</span>.setState({
+      <span class="hljs-attr">age</span>: <span class="hljs-keyword">this</span>.state.age + <span class="hljs-number">1</span>
+    })
+  }
+
+  render () {
+    <span class="hljs-keyword">const</span> {name, age} = <span class="hljs-keyword">this</span>.state
+
+    <span class="hljs-keyword">return</span> (
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'parent'</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Child</span> <span class="hljs-attr">name</span>=<span class="hljs-string">'Tom'</span> <span class="hljs-attr">age</span>=<span class="hljs-string">{18}</span> <span class="hljs-attr">onAdd</span>=<span class="hljs-string">{this.onAdd}</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">Child</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+    )
+  }
+}
+</code></pre>
+</div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="section">
+    <h2 class="title">模板/JSX语法</h2>
+    <div class="content">
+      <div class="left">
+        <h3 class="title">Vue</h3>
+        <div class="content"><pre><code class="lang-html"><span class="xml"><span class="hljs-comment">&lt;!-- 可搭配其他模板语言，如Pug等 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- 变量 --&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span><span class="hljs-template-variable">{{name}</span><span class="xml">}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- 表达式 --&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span><span class="hljs-template-variable">{{ ok ? 'YES' : 'NO' }</span><span class="xml">}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- HTML --&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">v-html</span>=<span class="hljs-string">"rawHtml"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- 属性：属性名必须小写（kebab-case） --&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"app"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">:id</span>=<span class="hljs-string">"dynamicId"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">foo</span> <span class="hljs-attr">:task-count</span>=<span class="hljs-string">"18"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">foo</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">foo</span> <span class="hljs-attr">:class</span>=<span class="hljs-string">"['item', foo]"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">foo</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">foo</span> <span class="hljs-attr">:style</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{'margin-top': '10px'}</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">foo</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- 事件 --&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">foo</span> @<span class="hljs-attr">action</span>=<span class="hljs-string">"onAction"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">foo</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span></span>
+</code></pre>
+</div>
+      </div>
+      <div class="right">
+        <h3 class="title">React</h3>
+        <div class="content"><pre><code class="lang-js">render () {
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-comment">&lt;!-- 变量 --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{name}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-comment">&lt;!-- 表达式 --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{ ok ? 'YES' : 'NO' }<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-comment">&lt;!-- HTML --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">dangerouslySetInnerHTML</span>=<span class="hljs-string">{rawHtml}</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-comment">&lt;!-- 属性 --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">'app'</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">{dynamicId}</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">foo</span> <span class="hljs-attr">taskCount</span>=<span class="hljs-string">{18}</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">foo</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">foo</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{</span>'<span class="hljs-attr">item</span> ' + <span class="hljs-attr">foo</span>}&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">foo</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">foo</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{{marginTop:</span> <span class="hljs-attr">10</span>}}&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">foo</span>&gt;</span>
+    <span class="hljs-comment">&lt;!-- 事件 --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">foo</span> <span class="hljs-attr">onAction</span>=<span class="hljs-string">"onAction"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">foo</span>&gt;</span>
+  )
+}</span>
+</code></pre>
+</div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="section">
+    <h2 class="title">条件渲染</h2>
+    <div class="content">
+      <div class="left">
+        <h3 class="title">Vue</h3>
+        <div class="content"><pre><code class="lang-html">&lt;<span class="hljs-keyword">template</span>&gt;
+  &lt;<span class="hljs-keyword">div</span> v-<span class="hljs-keyword">if</span>=<span class="hljs-string">"foo"</span>&gt;foo&lt;/<span class="hljs-keyword">div</span>&gt;
+&lt;/<span class="hljs-keyword">template</span>&gt;
+
+&lt;<span class="hljs-keyword">template</span>&gt;
+  &lt;<span class="hljs-keyword">div</span> v-<span class="hljs-keyword">if</span>=<span class="hljs-string">"foo"</span>&gt;foo&lt;/<span class="hljs-keyword">div</span>&gt;
+  &lt;<span class="hljs-keyword">div</span> v-<span class="hljs-keyword">else</span>-<span class="hljs-keyword">if</span>=<span class="hljs-string">"bar"</span>&gt;bar&lt;/<span class="hljs-keyword">div</span>&gt;
+&lt;/<span class="hljs-keyword">template</span>&gt;
+
+&lt;<span class="hljs-keyword">template</span>&gt;
+  &lt;<span class="hljs-keyword">div</span> v-<span class="hljs-keyword">if</span>=<span class="hljs-string">"foo"</span>&gt;foo&lt;/<span class="hljs-keyword">div</span>&gt;
+  &lt;<span class="hljs-keyword">div</span> v-<span class="hljs-keyword">else</span>-<span class="hljs-keyword">if</span>=<span class="hljs-string">"bar"</span>&gt;bar&lt;/<span class="hljs-keyword">div</span>&gt;
+  &lt;<span class="hljs-keyword">div</span> v-<span class="hljs-keyword">else</span>&gt;other&lt;/<span class="hljs-keyword">div</span>&gt;
+&lt;/<span class="hljs-keyword">template</span>&gt;
+</code></pre>
+</div>
+      </div>
+      <div class="right">
+        <h3 class="title">React</h3>
+        <div class="content"><pre><code class="lang-js">render () {
+  <span class="hljs-keyword">return</span> foo &amp;&amp; <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>foo<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+}
+
+render () {
+  <span class="hljs-keyword">return</span> foo ? <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>foo<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span> : <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>bar<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+}
+
+render () {
+  <span class="hljs-keyword">return</span> (
+    { foo ? <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>foo<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+      : bar
+      ? <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>bar<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+      : <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>other<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+    }
+  )
+}
+</code></pre>
+</div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="section">
+    <h2 class="title">列表渲染</h2>
+    <div class="content">
+      <div class="left">
+        <h3 class="title">Vue</h3>
+        <div class="content"><pre><code class="lang-html">&lt;template&gt;
+  &lt;<span class="hljs-keyword">div</span> <span class="hljs-built_in">class</span>='<span class="hljs-built_in">list</span>'&gt;
+    &lt;<span class="hljs-keyword">div</span> v-<span class="hljs-keyword">for</span>=<span class="hljs-string">"item in list"</span> :key=<span class="hljs-string">"item"</span>&gt;{{<span class="hljs-built_in">item</span>}}&lt;/<span class="hljs-keyword">div</span>&gt;
+  &lt;/<span class="hljs-keyword">div</span>&gt;
+&lt;/template&gt;
+</code></pre>
+</div>
+      </div>
+      <div class="right">
+        <h3 class="title">React</h3>
+        <div class="content"><pre><code class="lang-js">render () {
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'list'</span>&gt;</span>
+      {list.map((item) =&gt; <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{item}</span>&gt;</span>{item}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>)}
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+  )
+}
+</code></pre>
+<pre><code class="lang-js"><span class="hljs-comment">// 或者</span>
+render () {
+  const items = list.map((item) =&gt; &lt;<span class="hljs-keyword">div</span> key={item}&gt;{item}&lt;/<span class="hljs-keyword">div</span>&gt;)
+
+  <span class="hljs-keyword">return</span> (
+    &lt;<span class="hljs-keyword">div</span> className=<span class="hljs-string">'list'</span>&gt;
+      {items}
+    &lt;/<span class="hljs-keyword">div</span>&gt;
+  )
+}
+</code></pre>
+</div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="section">
+    <h2 class="title">表单&双向绑定</h2>
+    <div class="content">
+      <div class="left">
+        <h3 class="title">Vue</h3>
+        <div class="content"><pre><code class="lang-html"><span class="hljs-comment">&lt;!-- 表单 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">form</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">v-model</span>=<span class="hljs-string">"name"</span>&gt;</span>
+    <span class="hljs-comment">&lt;!--
+      相当于以下的语法糖：
+      &lt;input v-bind:value="name" v-on:input="name = $event.target.value"&gt;
+      在组件中相当于
+      &lt;foo v-bind:value="name" v-on:input="name = arguments[0]"&gt;&lt;/foo&gt;
+    --&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+  <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+    data () {
+      <span class="hljs-keyword">return</span> {
+        <span class="hljs-attr">name</span>: <span class="hljs-string">''</span>
+      }
+    }
+  }
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre>
+<pre><code class="lang-html"><span class="hljs-comment">&lt;!-- Vue 2.3.0+ --&gt;</span>
+
+<span class="hljs-comment">&lt;!-- Parent.vue --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">child</span> <span class="hljs-attr">:foo.sync</span>=<span class="hljs-string">"bar"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">child</span>&gt;</span>
+  <span class="hljs-comment">&lt;!--
+    sync只是语法糖，实际上拓展为：
+    &lt;child :foo="bar" @update:foo="val =&gt; bar = val"&gt;&lt;/child&gt;
+  --&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- Child.vue --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+  <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+    <span class="hljs-attr">methods</span>: {
+      onChange () {
+        <span class="hljs-keyword">this</span>.$emit(<span class="hljs-string">'update:foo'</span>, newValue)
+      }
+    }
+  }
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre>
+</div>
+      </div>
+      <div class="right">
+        <h3 class="title">React</h3>
+        <div class="content"><pre><code class="lang-js">interface <span class="hljs-type">IFooState</span> {
+  name: string
+}
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component&lt;</span></span>{}, <span class="hljs-type">IFooState</span>&gt; {
+  onChange = (e) =&gt; {
+    const name = e.target.value
+    <span class="hljs-keyword">this</span>.setState({name})
+  }
+
+  render () {
+    const {value} = <span class="hljs-keyword">this</span>.state
+
+    <span class="hljs-keyword">return</span> (
+      &lt;div&gt;
+        &lt;input value={value} onChange={<span class="hljs-keyword">this</span>.onChange}/&gt;
+      &lt;/div&gt;
+    )
+  }
+}
+</code></pre>
+</div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="section">
+    <h2 class="title">内容分发</h2>
+    <div class="content">
+      <div class="left">
+        <h3 class="title">Vue</h3>
+        <div class="content"><pre><code class="lang-html"><span class="xml"><span class="hljs-comment">&lt;!-- Child --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- 必须有根元素 --&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"child"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">slot</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"header"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">slot</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">slot</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">slot</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">slot</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"footer"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">slot</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+  <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> </span></span><span class="hljs-template-variable">{}</span><span class="xml"><span class="undefined">
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- Parent --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"parent"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">child</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">slot</span>=<span class="hljs-string">"header"</span>&gt;</span>header<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>content<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">slot</span>=<span class="hljs-string">"footer"</span>&gt;</span>footer<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">child</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+  <span class="hljs-keyword">import</span> Child <span class="hljs-keyword">from</span> <span class="hljs-string">'./Child'</span>
+  <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> </span></span><span class="hljs-template-variable">{
+    components: {Child}</span><span class="xml"><span class="undefined">
+  }
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span>
+</code></pre>
+</div>
+      </div>
+      <div class="right">
+        <h3 class="title">React</h3>
+        <div class="content"><pre><code class="lang-js">interface <span class="hljs-type">IChildProps</span> {
+  header?: <span class="hljs-type">React</span>.<span class="hljs-type">Node</span>,
+  children?: <span class="hljs-type">React</span>.<span class="hljs-type">Node</span>,
+  footer?: <span class="hljs-type">React</span>.<span class="hljs-type">Node</span>
+}
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Child</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component&lt;IChildProps</span>, <span class="hljs-title">void&gt;</span> </span>{
+  render () {
+    const {header, children, footer} = <span class="hljs-keyword">this</span>.props
+    <span class="hljs-keyword">return</span> (
+      &lt;div className=<span class="hljs-symbol">'chil</span>d'&gt;
+        {header}
+        {children}
+        {footer}
+      &lt;/div&gt;
+    )
+  }
+}
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Parent</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component&lt;</span></span>{}, void&gt; {
+  render () {
+    <span class="hljs-keyword">return</span> (
+      &lt;div className=<span class="hljs-symbol">'paren</span>t'&gt;
+        &lt;<span class="hljs-type">Child</span>
+          className=<span class="hljs-symbol">'chil</span>d'
+          header=<span class="hljs-symbol">'heade</span>r'}
+          footer={&lt;p&gt;footer&lt;/p&gt;}&gt;
+          &lt;p&gt;content&lt;/p&gt;
+        &lt;/<span class="hljs-type">Child</span>&gt;
+      &lt;/div&gt;
+    )
+  }
+}
+</code></pre>
+</div>
+      </div>
+    </div>
+  </div>
+  
+  </div>
+  <div class="footer">
+    <a href="https://github.com/ecfexorg/difference-between-vue-and-react">Github</a>
+  </div>
+</body>
+</html>

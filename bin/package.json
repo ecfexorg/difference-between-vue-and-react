@@ -1,0 +1,25 @@
+{
+  "name": "difference-between-vue-and-react",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ecfexorg/difference-between-vue-and-react.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ecfexorg/difference-between-vue-and-react/issues"
+  },
+  "homepage": "https://github.com/ecfexorg/difference-between-vue-and-react#readme",
+  "dependencies": {
+    "highlight.js": "^9.11.0",
+    "marked": "^0.3.6"
+  }
+}

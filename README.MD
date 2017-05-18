@@ -61,6 +61,14 @@ Vue.component('my-component', {/* 选项 */})
 * React
 
 ```js
+// 无状态组件
+const Foo = () => {
+  return <div className='foo'></div>
+}
+```
+
+```js
+// 完整组件
 class Foo extends React.Component<{}, void> {
   render () {
     return <div className='foo'>hello</div>

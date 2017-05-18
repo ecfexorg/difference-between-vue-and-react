@@ -82,7 +82,13 @@ Vue.component(<span class="hljs-string">'my-component'</span>, {<span class="hlj
       </div>
       <div class="right">
         <h3 class="title">React</h3>
-        <div class="content"><pre><code class="lang-js"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component&lt;</span></span>{}, void&gt; {
+        <div class="content"><pre><code class="lang-js"><span class="hljs-comment">// 无状态组件</span>
+<span class="hljs-keyword">const</span> Foo = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'foo'</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+}
+</code></pre>
+<pre><code class="lang-js"><span class="hljs-comment">// 完整组件</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component&lt;</span></span>{}, void&gt; {
   render () {
     <span class="hljs-keyword">return</span> &lt;div className=<span class="hljs-symbol">'fo</span>o'&gt;hello&lt;/div&gt;
   }

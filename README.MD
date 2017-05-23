@@ -84,8 +84,10 @@ class Foo extends React.Component<{}, void> {
 <!-- 以单文件组件为例：Foo.js -->
 <template>
   <div class="Foo">
-    <!-- 必须小写，不能自闭合 -->
+    <!-- kebab-case -->
     <bar></bar>
+    <!-- 或 -->
+    <Bar></Bar>
   </div>
 </template>
 <script>
@@ -108,7 +110,7 @@ class Foo extends React.Component<{}, void> {
   render () {
     return (
       <div className='foo'>
-        {/* 组件约定大写开头，可自闭合 */}
+        {/* 组件约定大写开头*/}
         <Bar/>
       </div>
     )
@@ -309,7 +311,7 @@ class Parent extends React.Component<{}, IParentState> {
   <div>{{ ok ? 'YES' : 'NO' }}</div>
   <!-- HTML -->
   <div v-html="rawHtml"></div>
-  <!-- 属性：属性名必须小写（kebab-case） -->
+  <!-- 属性 -->
   <div id="app"></div>
   <div :id="dynamicId"></div>
   <foo :task-count="18"></foo>

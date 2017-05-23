@@ -107,8 +107,10 @@ Vue.component(<span class="hljs-string">'my-component'</span>, {<span class="hlj
         <div class="content"><pre><code class="lang-html"><span class="hljs-comment">&lt;!-- 以单文件组件为例：Foo.js --&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"Foo"</span>&gt;</span>
-    <span class="hljs-comment">&lt;!-- 必须小写，不能自闭合 --&gt;</span>
+    <span class="hljs-comment">&lt;!-- kebab-case --&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">bar</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">bar</span>&gt;</span>
+    <span class="hljs-comment">&lt;!-- 或 --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Bar</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">Bar</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
@@ -131,7 +133,7 @@ Vue.component(<span class="hljs-string">'my-component'</span>, {<span class="hlj
   render () {
     <span class="hljs-keyword">return</span> (
       &lt;div className=<span class="hljs-symbol">'fo</span>o'&gt;
-        {<span class="hljs-comment">/* 组件约定大写开头，可自闭合 */</span>}
+        {<span class="hljs-comment">/* 组件约定大写开头*/</span>}
         &lt;<span class="hljs-type">Bar</span>/&gt;
       &lt;/div&gt;
     )
@@ -342,7 +344,7 @@ interface IParentState {
   <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span><span class="hljs-template-variable">{{ ok ? 'YES' : 'NO' }</span><span class="xml">}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
   <span class="hljs-comment">&lt;!-- HTML --&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">v-html</span>=<span class="hljs-string">"rawHtml"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-  <span class="hljs-comment">&lt;!-- 属性：属性名必须小写（kebab-case） --&gt;</span>
+  <span class="hljs-comment">&lt;!-- 属性 --&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"app"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">:id</span>=<span class="hljs-string">"dynamicId"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">foo</span> <span class="hljs-attr">:task-count</span>=<span class="hljs-string">"18"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">foo</span>&gt;</span>
